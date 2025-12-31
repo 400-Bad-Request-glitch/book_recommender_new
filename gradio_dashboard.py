@@ -131,6 +131,9 @@ from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_chroma import Chroma
 
 import gradio as gr
+from fastapi import FastAPI
+
+app = FastAPI()
 
 #load_dotenv()
 
@@ -254,9 +257,10 @@ with gr.Blocks(theme=gr.themes.Glass()) as dashboard:
         inputs=[user_query, category_dropdown, tone_dropdown],
         outputs=output
     )
-
-if __name__ == "__main__":
-    dashboard.launch()
+app = gr.mount_gradio_app(app, dashboard, path="/")
+#if __name__ == "__main__":
+    #dashboard.launch()
+    #app = gr.mount_gradio_app(app, dashboard, path="/")
 
 
 
